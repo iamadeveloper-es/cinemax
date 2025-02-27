@@ -1,7 +1,10 @@
 {
-  "name": "nuxt-app",
+  "name": "cinemax",
   "private": true,
   "type": "module",
+  "engines": {
+    "node": ">= 20.13.1"
+  },
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
@@ -13,5 +16,9 @@
     "nuxt": "^3.15.4",
     "vue": "latest",
     "vue-router": "latest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iamadeveloper-es/cinemax.git"
   }
 }
