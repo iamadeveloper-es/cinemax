@@ -1,6 +1,7 @@
 {
   "name": "cinemax",
   "private": true,
+  "version": "1.0.0",
   "type": "module",
   "engines": {
     "node": ">= 20.13.1"
@@ -10,15 +11,42 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix",
+    "prepare": "husky",
+    "test": "lint-staged"
   },
   "dependencies": {
+    "@nuxtjs/tailwindcss": "^6.13.1",
+    "lint-staged": "^15.4.3",
     "nuxt": "^3.15.4",
     "vue": "latest",
     "vue-router": "latest"
   },
+  "devDependencies": {
+    "@vue/eslint-config-prettier": "^8.0.0",
+    "@vue/eslint-config-typescript": "^11.0.3",
+    "eslint": "^8.45.0",
+    "eslint-plugin-vue": "^9.32.0",
+    "sass": "^1.85.1",
+    "typescript": "^5.1.6"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/iamadeveloper-es/cinemax.git"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,ts,jsx}": [
+      "npx prettier --write",
+      "npm run lint"
+    ],
+    "*.{html,css,sass,less,ejs}": [
+      "prettier --write src/"
+    ]
   }
 }
