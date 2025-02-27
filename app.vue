@@ -1,5 +1,7 @@
+<script lang="ts">
+import '~/assets/scss/main.scss';
+</script>
+
 <template>
-  <div>
-    <NuxtPage/>
-  </div>
+  <NuxtPage/>
 </template>

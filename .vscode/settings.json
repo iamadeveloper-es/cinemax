@@ -1,0 +1,14 @@
+{
+    "eslint.validate": [
+      "javascript",
+      "vue",
+    ],
+    "vue.features": {
+        "diagnostics": true
+    },
+    "volar.useWorkspaceTsdk": true,
+    "typescript.tsdk": "node_modules/typescript/lib",
+    "volar.format.enable": true,
+    "volar.autoCompleteRefs": true,
+    "volar.diagnostics.template": true
+}
