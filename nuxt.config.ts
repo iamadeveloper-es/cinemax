@@ -7,5 +7,21 @@ export default defineNuxtConfig({
       apiBaseUrl: process.env.API_BASE_URL,
       omDBApiKey: process.env.NUXT_OMDB_API_KEY
     }
+  },
+  modules: ['@nuxtjs/tailwindcss'],
+  vite: {
+    /* options for vite */
+    // ssr: true // enable unstable server-side rendering for development (false by default)
+    // experimentWarning: false // hide experimental warning message (disabled by default for tests)
+    css: {
+      preprocessorOptions: {
+        scss: {
+          additionalData: '@use "@/assets/scss/abstract/index";'
+        }
+      }
+    },
+    vue: {
+      /* options for vite-plugin-vue2 */
+    }
   }
 });

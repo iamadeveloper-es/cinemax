@@ -5,3 +5,11 @@ import '~/assets/scss/main.scss';
 <template>
   <NuxtPage/>
 </template>
+
+<style lang="scss">
+.app-wrapper{
+  main{
+    margin: 1rem;
+  }
+}
+</style>
