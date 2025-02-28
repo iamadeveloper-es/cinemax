@@ -28,6 +28,7 @@
     "@vue/eslint-config-typescript": "^11.0.3",
     "eslint": "^8.45.0",
     "eslint-plugin-vue": "^9.32.0",
+    "ofetch": "^1.4.1",
     "sass": "^1.85.1",
     "typescript": "^5.1.6"
   },
