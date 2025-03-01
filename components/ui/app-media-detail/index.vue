@@ -30,12 +30,7 @@ const imageOnError = (event: Event) => {
       <p class="font-primary-light">{{ media?.Plot }}</p>
       <div class="mt-4">
         <span class="block mb-1 font-primary-light text-grey-200">Rating:</span>
-        <div class="rating inline-flex items-center gap-1 bg-black p-2 rounded-md">
-          <GlobalsAppSvg
-          name="star"
-          :icon-color="'var(--warning-500)'"/>
-          <span class="block text-warning-500">{{ media?.imdbRating }}</span>
-        </div>
+        <GlobalsAppRating :rate="media.imdbRating"/>
       </div>
       <div class="mt-4">
         <span class="block mb-1 font-primary-light text-grey-200">Type:</span>
