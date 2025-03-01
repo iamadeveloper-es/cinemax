@@ -12,19 +12,30 @@ defineProps({
   }
 });
 
+const imageOnError = (event: Event) => {
+  const target = event.target as HTMLImageElement;
+  target.src = '/images/image-not-found.jpg';
+};
+
 </script>
 
 <template>
-  <div class="media-detail-container grid grid-cols-12 gap-10 mt-6">
-    <div class="media-detail-poster col-span-12 md:col-span-5">
-      <img class="w-full" :src="media?.Poster" :alt="media?.Title">
+  <div class="media-detail-container grid grid-cols-12 gap-4 md:gap-10 mt-6">
+    <div class="media-detail-poster col-span-12 md:col-span-4">
+      <img class="w-full" :src="media?.Poster" @error="imageOnError" :alt="media?.Title">
     </div>
     <div class="media-detail-info col-span-12 md:col-span-7">
-      <h2 class="font-heading-four text-heading-four mb-4">{{ media?.Title }}</h2>
-      <p class="font-primary-light text-grey-200">{{ media?.Plot }}</p>
-      <div class="rating mt-4">
+      <!-- <h2 class="font-heading-four text-heading-four mb-4">{{ media?.Title }}</h2> -->
+      <span class="block mb-1 font-primary-light text-grey-200">Description:</span>
+      <p class="font-primary-light">{{ media?.Plot }}</p>
+      <div class="mt-4">
         <span class="block mb-1 font-primary-light text-grey-200">Rating:</span>
-        <span class="block">{{ media?.imdbRating }}</span>
+        <div class="rating inline-flex items-center gap-1 bg-black p-2 rounded-md">
+          <GlobalsAppSvg
+          name="star"
+          :icon-color="'var(--warning-500)'"/>
+          <span class="block text-warning-500">{{ media?.imdbRating }}</span>
+        </div>
       </div>
       <div class="mt-4">
         <span class="block mb-1 font-primary-light text-grey-200">Type:</span>
