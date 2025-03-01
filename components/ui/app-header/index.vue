@@ -20,8 +20,8 @@ const menuRoutes = [
     route: '/movies'
   },
   {
-    name: 'Series',
-    route: '/series'
+    name: 'TV Shows',
+    route: '/tv-shows'
   }
 ];
 </script>
