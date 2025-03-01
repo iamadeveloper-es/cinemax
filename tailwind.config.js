@@ -9,6 +9,7 @@ module.exports = {
     theme: {
         extend: {
             colors: {
+                black: '#000000',
                 primary: {
                     '300rgba-80': 'rgba(18, 24, 41, .8)'
                 },
@@ -16,6 +17,9 @@ module.exports = {
                     900: '#121829',
                     200: '#A8AEBF',
                     400: '#767E94'
+                },
+                warning: {
+                    500: '#FFAD49'
                 }
             },
             fontFamily: {
