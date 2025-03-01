@@ -8,21 +8,21 @@ export default {
 <script lang="ts" setup>
 import { navigateTo } from '#app';
 const {$api} = useNuxtApp();
-const movies = ref();
+const tvShows = ref();
 
-const getMovies = async () => {
+const getTvShows = async () => {
   const params = {
-    s: 'star wars'
+    s: 'dark'
   };
-  const {data, error} = await $api.media.movies(params);
-  movies.value = data.value.Search;
+  const {data, error} = await $api.media.tvShows(params);
+  tvShows.value = data.value.Search;
 };
 
 const goToDetail = (mediaItem: Object) => {
-  navigateTo(`/movies/${mediaItem.imdbID}`);
+  navigateTo(`/tv-shows/${mediaItem.imdbID}`);
 };
 
-getMovies();
+getTvShows();
 
 </script>
 
@@ -31,12 +31,12 @@ getMovies();
     <section class="section">
       <div class="md:container md:mx-auto">
         <UiAppPageTitle
-        title="Movies"
+        title="TV Shows"
         />
         <article class="mt-6">
           <div class="grid grid-cols-12 gap-4">
             <UiAppCardMedia
-            v-for="(media, index) in movies"
+            v-for="(media, index) in tvShows"
             :key="index"
             :media="media"
             @onClick="goToDetail(media)"

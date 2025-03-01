@@ -25,6 +25,7 @@ getTvShow();
       <div class="md:container md:mx-auto">
         <UiAppPageTitle
         :title="tvShow.Title"
+        :class="['col-span-12', 'md:col-span-7']"
         />
         <UiAppMediaDetail :media="tvShow"/>
       </div>
