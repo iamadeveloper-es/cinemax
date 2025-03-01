@@ -5,17 +5,39 @@ export default {
 </script>
 
 <script lang="ts" setup>
-defineProps({
+const {setToLocalStorage} = useStorage();
+
+const props = defineProps({
   media: {
     type: Object,
     required: true
   }
 });
 
+const storedValue = ref([]);
+
+const hasBeenWhatched = computed(() => {
+  return storedValue.value.some(item => item.imdbID === props.media.imdbID);
+});
+
 const imageOnError = (event: Event) => {
   const target = event.target as HTMLImageElement;
   target.src = '/images/image-not-found.jpg';
 };
+
+const playMedia = () => {
+  setToLocalStorage(props.media);
+  checkStorageItem();
+};
+
+const checkStorageItem = () => {
+  const data = localStorage.getItem('viewed');
+  storedValue.value = data ? JSON.parse(data) : [];
+};
+
+onMounted(() => {
+  checkStorageItem();
+});
 
 </script>
 
@@ -48,13 +70,19 @@ const imageOnError = (event: Event) => {
         <span class="block mb-1 font-primary-light text-grey-200">Genres</span>
         <span class="block">{{ media?.Genre }}</span>
       </div>
+      <UiAppButton
+      :class="['my-6']"
+      :text="!hasBeenWhatched ? 'Start watching' : 'Allready watched'"
+      :disabled="hasBeenWhatched"
+      @onClick="playMedia"
+      />
     </div>
   </div>
 </template>
 
 <style lang="scss">
 .media-detail-poster{
-  border-radius: 25px;
+  border-radius: 15px;
   overflow: hidden;
 }
 </style>
