@@ -14,17 +14,21 @@ module.exports = {
                 },
                 grey: {
                     900: '#121829',
-                    200: '#A8AEBF'
+                    200: '#A8AEBF',
+                    400: '#767E94'
                 }
             },
             fontFamily: {
                 sans: ['Inter', 'sans-serif'],
-                heading: ['Poppins', 'sans-serif'],
+                'heading-one': ['Poppins-Semibold', 'sans-serif'],
+                'heading-three': ['Poppins-Semibold', 'sans-serif'],
+                'heading-four': ['Poppins-Semibold', 'sans-serif'],
                 'primary-light': 'Poppins-Light'
             },
-            spacing: {
-                128: '32rem',
-                144: '36rem'
+            fontSize: {
+                'heading-one': '4em',
+                'heading-three': '2em',
+                'heading-four': '2.125em'
             }
         }
     },
