@@ -31,5 +31,9 @@ const menuRoutes = [
   backdrop-filter: blur(20px);
   position: sticky;
   top: 0;
+
+  li .router-link-exact-active{
+    border-bottom: 1px solid currentColor;
+  }
 }
 </style>
