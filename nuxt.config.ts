@@ -8,7 +8,7 @@ export default defineNuxtConfig({
       omDBApiKey: process.env.NUXT_OMDB_API_KEY
     }
   },
-  modules: ['@nuxtjs/tailwindcss', 'nuxt-svgo'],
+  modules: ['@pinia/nuxt', '@nuxtjs/tailwindcss', 'nuxt-svgo'],
   vite: {
     /* options for vite */
     // ssr: true // enable unstable server-side rendering for development (false by default)
