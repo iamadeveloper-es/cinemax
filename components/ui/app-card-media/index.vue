@@ -44,22 +44,35 @@ const deleteItem = () => {
     class="media-card cursor-pointer"
     :class="colSpan">
       <div @click="onClick">
-        <img
-        class="poster"
-        :src="props.media.Poster"
-        @error="imageOnError"
-        :alt="media.Title">
+        <div class="media-card-poster">
+          <img
+          class="poster"
+          :src="props.media.Poster"
+          @error="imageOnError"
+          :alt="media.Title">
+          <UiAppButton
+          v-if="canDelete"
+          :class="['media-card-btn']"
+          text="Delete"
+          @onClick="deleteItem"
+          />
+        </div>
         <h4 class="media-card-title my-3">{{ media.Title }}</h4>
       </div>
-      <UiAppButton
-      v-if="canDelete"
-      :class="['my-6']"
-      text="Delete"
-      @onClick="deleteItem"
-      />
   </div>
 </template>
 
-<style>
+<style lang="scss" scoped>
+.media-card{
 
+  .media-card-poster{
+    position: relative;
+  }
+  .media-card-btn{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    border-radius: 5px 5px 0 0;
+  }
+}
 </style>
