@@ -9,17 +9,41 @@ export default {
 import { navigateTo } from '#app';
 const {$api} = useNuxtApp();
 const tvShows = ref([]);
+const searchValue = ref('');
+const hasError = ref(false);
+
+const feedbackModel = {
+  title: 'Sorry, No results found',
+  text: 'There are no movies or TV shows matching your search terms.'
+};
 
 const getTvShows = async () => {
-  const params = {
-    s: 'dark'
-  };
-  const {data, error} = await $api.media.tvShows(params);
-  tvShows.value = data.value.Search;
+  try {
+    tvShows.value = [];
+    const params = {
+      s: searchValue.value ? searchValue.value : 'dark'
+    };
+    const {data, error} = await $api.media.tvShows(params);
+    if(data.value.Response === 'False'){
+      throw Error(data.value.Error);
+    }
+    tvShows.value = data.value.Search;
+    hasError.value = false;
+  } catch (error) {
+    hasError.value = true;
+  }
+
+
 };
 
 const goToDetail = (mediaItem: Object) => {
   navigateTo(`/tv-shows/${mediaItem.imdbID}`);
+};
+
+const startSearch = () => {
+  if(searchValue.value.length > 3){
+    getTvShows();
+  }
 };
 
 getTvShows();
@@ -33,6 +57,19 @@ getTvShows();
         <UiAppPageTitle
         title="TV Shows"
         />
+        <form @submit.prevent="startSearch">
+          <div class="grid gap-6 mb-6 md:grid-cols-2">
+              <div>
+                  <input type="text" id="first_name" class="bg-grey-900 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search..." v-model="searchValue" />
+                  <UiAppButton
+                  :class="['my-5']"
+                  :disabled="searchValue.length < 3"
+                  type="submit"
+                  text="Search"
+                  />
+              </div>
+          </div>
+        </form>
         <article class="mt-6">
           <div class="grid grid-cols-12 gap-4">
             <template v-if="tvShows && tvShows.length > 0">
@@ -43,7 +80,7 @@ getTvShows();
               @onClick="goToDetail(media)"
               />
             </template>
-            <template v-else>
+            <template v-else-if="!hasError">
               <div class="col-span-6 sm:col-span-4 md:col-span-3 lg:col-span-2" v-for="(item, index) in 18"
               :key="index">
                 <div role="status" class="flex items-center justify-center h-56 max-w-sm bg-gray-300 rounded-lg animate-pulse dark:bg-gray-700">
@@ -55,6 +92,10 @@ getTvShows();
                 </div>
               </div>
             </template>
+            <GlobalsAppFeedback
+            :model="feedbackModel"
+            v-else
+            />
           </div>
         </article>
       </div>

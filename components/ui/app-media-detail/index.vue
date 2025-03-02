@@ -52,7 +52,7 @@ onMounted(() => {
       <p class="font-primary-light">{{ media?.Plot }}</p>
       <div class="mt-4">
         <span class="block mb-1 font-primary-light text-grey-200">Rating:</span>
-        <GlobalsAppRating :rate="media.imdbRating"/>
+        <GlobalsAppRating :rate="media?.imdbRating ? media?.imdbRating : 'N/A'"/>
       </div>
       <div class="mt-4">
         <span class="block mb-1 font-primary-light text-grey-200">Type:</span>

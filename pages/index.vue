@@ -12,6 +12,7 @@ const {$api} = useNuxtApp();
 const movies = ref();
 const tvShows = ref();
 const allMedia = ref([]);
+const isLoading = ref(false);
 
 const getMovies = async () => {
   const params = {
@@ -23,16 +24,27 @@ const getMovies = async () => {
 
 const getTvShows = async () => {
   const params = {
-    s: 'superman'
+    s: 'terror'
   };
   const {data, error} = await $api.media.tvShows(params);
   return data.value.Search;
 };
 
 const getAllMedia = async () => {
-  movies.value = await getMovies();
-  tvShows.value = await getTvShows();
-  allMedia.value = [...movies.value, ...tvShows.value];
+  isLoading.value = true;
+  try {
+    const moviesData = await getMovies();
+    const tvShowsData = await getTvShows();
+    isLoading.value = false;
+
+    movies.value = moviesData || [];
+    tvShows.value = tvShowsData || [];
+    allMedia.value = [...movies.value, ...tvShows.value];
+
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    allMedia.value = [];
+  }
 };
 
 getAllMedia();
@@ -59,16 +71,14 @@ const goToDetail = (mediaItem: Object) => {
             <h2 class="text-grey-400 font-heading-three text-heading-three">All</h2>
           </header>
           <div class="grid grid-cols-12 gap-4">
-            <template v-if="allMedia && allMedia.length > 0">
               <UiAppCardMedia
+              v-show="!isLoading"
               v-for="(media, index) in allMedia"
               :key="index"
               :media="media"
               @onClick="goToDetail(media)"
               />
-            </template>
-            <template v-else>
-              <div class="col-span-6 sm:col-span-4 md:col-span-3 lg:col-span-2" v-for="(item, index) in 18"
+              <div v-show="isLoading && movies?.length <= 0" class="col-span-6 sm:col-span-4 md:col-span-3 lg:col-span-2" v-for="(item, index) in 18"
               :key="index">
                 <div role="status" class="flex items-center justify-center h-56 max-w-sm bg-gray-300 rounded-lg animate-pulse dark:bg-gray-700">
                   <svg class="w-10 h-10 text-gray-200 dark:text-gray-600" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 20">
@@ -78,7 +88,6 @@ const goToDetail = (mediaItem: Object) => {
                   <span class="sr-only">Loading...</span>
                 </div>
               </div>
-            </template>
           </div>
         </article>
       </div>

@@ -48,6 +48,7 @@ onMounted(() => {
   backdrop-filter: blur(20px);
   position: sticky;
   top: 0;
+  z-index: 90;
 
   li .router-link-exact-active{
     border-bottom: 1px solid currentColor;
