@@ -1,0 +1,13 @@
+body{
+  font-family: var(--font-primary);
+  font-size: calc(10px + 0.33vw);
+  color: var(--white);
+}
+
+.section{
+  padding-top: 2rem;
+}
+.poster{
+  aspect-ratio: 9/16;
+  object-fit: cover;
+}
