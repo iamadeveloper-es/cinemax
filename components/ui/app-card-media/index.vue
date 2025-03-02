@@ -33,7 +33,8 @@ const onClick = () => {
   emit('onClick', props.media);
 };
 
-const deleteItem = () => {
+const deleteItem = (e: Event) => {
+  e.stopPropagation();
   deleteFromLocalStorage(props.media.imdbID);
 };
 
