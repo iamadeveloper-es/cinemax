@@ -47,7 +47,7 @@ onMounted(() => {
         <div v-else>
           <p>Nothing has been saved, yet...</p>
           <UiAppButton
-          :class="['my-6']"
+          :class="['my-2']"
           text="Take me Home"
           @onClick="navigateTo('/')"
           />
