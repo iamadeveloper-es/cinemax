@@ -5,6 +5,8 @@ export default {
 </script>
 
 <script lang="ts" setup>
+const {deleteFromLocalStorage} = useStorage();
+
 const emit = defineEmits(['onClick']);
 
 const props = defineProps({
@@ -15,6 +17,10 @@ const props = defineProps({
   colSpan: {
     type: Array,
     default: () => ['col-span-6', 'sm:col-span-4', 'md:col-span-3', 'lg:col-span-2']
+  },
+  canDelete: {
+    type: Boolean,
+    default: false
   }
 });
 
@@ -27,19 +33,30 @@ const onClick = () => {
   emit('onClick', props.media);
 };
 
+const deleteItem = () => {
+  deleteFromLocalStorage(props.media.imdbID);
+};
+
 </script>
 
 <template>
   <div
     class="media-card cursor-pointer"
-    :class="colSpan"
-    @click="onClick">
-      <img
-      class="poster"
-      :src="props.media.Poster"
-      @error="imageOnError"
-      :alt="media.Title">
-      <h4 class="media-card-title my-3">{{ media.Title }}</h4>
+    :class="colSpan">
+      <div @click="onClick">
+        <img
+        class="poster"
+        :src="props.media.Poster"
+        @error="imageOnError"
+        :alt="media.Title">
+        <h4 class="media-card-title my-3">{{ media.Title }}</h4>
+      </div>
+      <UiAppButton
+      v-if="canDelete"
+      :class="['my-6']"
+      text="Delete"
+      @onClick="deleteItem"
+      />
   </div>
 </template>
 

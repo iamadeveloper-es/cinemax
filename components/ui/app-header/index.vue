@@ -8,12 +8,20 @@
         <li v-for="(route, index) in menuRoutes" :key="index">
           <NuxtLink :to="route.route" class="text-grey-200 font-primary-light">{{ route.name }}</NuxtLink>
         </li>
+        <li v-if="userList.length">
+          <NuxtLink to="/my-list" class="text-grey-200 font-primary-light">My List</NuxtLink>
+        </li>
       </ul>
     </nav>
   </header>
 </template>
 
 <script lang="ts" setup>
+import { storeToRefs } from 'pinia';
+import { useUserList } from '~/store/userList';
+const userListStore = useUserList();
+const {userList} = storeToRefs(userListStore);
+
 const menuRoutes = [
   {
     name: 'Movies',
@@ -24,6 +32,15 @@ const menuRoutes = [
     route: '/tv-shows'
   }
 ];
+
+const checkStorageItem = () => {
+  const data = localStorage.getItem('viewed');
+  data ? userListStore.addToList(JSON.parse(data)) : [];
+};
+
+onMounted(() => {
+  checkStorageItem();
+});
 </script>
 
 <style lang="scss">
