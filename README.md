@@ -4,7 +4,7 @@ Cinemax is a movie and series search engine that integrates with the OMDb API bu
 
 ## [Link to repository](https://github.com/iamadeveloper-es/cinemax)
 
-## Setting up the project
+## Run project
 
 ### 1. Clone the repo  
 
@@ -28,3 +28,16 @@ npm install
 ```bash 
 npm run dev
 ```
+
+## Design
+
+For the development of this website the design is based on the free to use Figma resource “Movie Listing Web App” designed by Pramod Poudel.
+
+Resource: https://www.figma.com/community/file/1054327700155381422
+
+licensed under CC BY 4.0.
+https://creativecommons.org/licenses/by/4.0/
+
+
+
+
