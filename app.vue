@@ -4,6 +4,7 @@ import '~/assets/scss/main.scss';
 
 <template>
   <NuxtPage/>
+  <NuxtSnackbar />
 </template>
 
 <style lang="scss">

@@ -41,7 +41,7 @@ class MediaModule extends FetchFactory<unknown> {
      * @param asyncDataOptions options for `useAsyncData`
      * @returns
      */
-  async series (params?: Object, asyncDataOptions?: AsyncDataOptions<unknown>) {
+  async tvShows (params?: Object, asyncDataOptions?: AsyncDataOptions<unknown>) {
     const queryParams = {
       type: 'series',
       page: 1,
@@ -54,6 +54,31 @@ class MediaModule extends FetchFactory<unknown> {
           'Accept-Language': 'en-US'
         },
         params: queryParams
+      };
+
+      return this.call(
+        'GET',
+        `${this.RESOURCE}`,
+        undefined, // body
+        fetchOptions
+      );
+    }, asyncDataOptions);
+  }
+
+  /**
+     * Returns single movie or tv show
+     * @param asyncDataOptions options for `useAsyncData`
+     * @returns
+     */
+  async findOneById (id: string, asyncDataOptions?: AsyncDataOptions<unknown>) {
+    return useAsyncData(() => {
+      const fetchOptions: FetchOptions<'json'> = {
+        headers: {
+          'Accept-Language': 'en-US'
+        },
+        params: {
+          i: id
+        }
       };
 
       return this.call(

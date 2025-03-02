@@ -8,7 +8,12 @@ export default defineNuxtConfig({
       omDBApiKey: process.env.NUXT_OMDB_API_KEY
     }
   },
-  modules: ['@nuxtjs/tailwindcss'],
+  modules: ['@pinia/nuxt', '@nuxtjs/tailwindcss', 'nuxt-svgo', 'nuxt-snackbar'],
+  snackbar: {
+    top: true,
+    left: true,
+    duration: 5000
+  },
   vite: {
     /* options for vite */
     // ssr: true // enable unstable server-side rendering for development (false by default)
